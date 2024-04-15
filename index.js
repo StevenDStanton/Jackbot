@@ -1,10 +1,10 @@
 require('dotenv').config();
 const { Client, GatewayIntentBits } = require('discord.js');
-const OpenAI = require('openai');
+const OpenAIAPI = require('openai');
 const jackbotRegex = new RegExp(process.env.BOT_NAME, 'i');
 const MAX_HISTORY = 25;
 const messageHistory = [];
-const OpenAIClient = new OpenAIApi({ apiKey: process.env.OPENAI_TOKEN });
+const OpenAIClient = new OpenAIAPI({ apiKey: process.env.OPENAI_TOKEN });
 
 const client = new Client({
   intents: [
@@ -36,7 +36,7 @@ async function generateAIResponse() {
   const messages = prepareMessages();
 
   try {
-    const completion = await openai.chat.completions.create({
+    const completion = await OpenAIClient.chat.completions.create({
       model: process.env.CHAT_MODEL,
       messages: messages,
     });
@@ -45,7 +45,7 @@ async function generateAIResponse() {
     return responseMessage;
   } catch (error) {
     console.error('Error:', error);
-    return 'Sorry, I am having trouble understanding you right now. Please try again later.';
+    return `Sorry, I'm having a pawsitively hard time understanding you right meow. Please try again later`;
   }
 }
 
