@@ -1,4 +1,4 @@
-const { insertChatRow } = require('./chatManager');
+const { insertChatRow } = require('./db');
 const MAX_HISTORY = 25;
 const messageHistory = [];
 
