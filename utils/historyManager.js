@@ -1,7 +1,9 @@
+import { insertChatRow } from './db';
 const MAX_HISTORY = 25;
 const messageHistory = [];
 
 function addMessageToHistory(role, speaker, content) {
+  insertChatRow(role, speaker, content);
   if (messageHistory.length > MAX_HISTORY) messageHistory.shift();
   messageHistory.push({ role, speaker, content });
 }

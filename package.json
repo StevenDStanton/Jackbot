@@ -4,6 +4,7 @@
   "description": "A Discord bot that uses OpenAI's GPT-4 to respond",
   "main": "index.js",
   "dependencies": {
+    "@libsql/client": "^0.6.0",
     "discord.js": "^14.14.1",
     "dotenv": "^16.4.5",
     "openai": "^4.33.1"
