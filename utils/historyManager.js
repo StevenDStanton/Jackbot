@@ -23,9 +23,15 @@ function prepareMessages() {
   ];
 
   for (let message of messageHistory) {
+    let messageContent = '';
+    if (message.speaker.toLowerCase() === 'jackbot') {
+      messageContent = `${message.content}`;
+    } else {
+      messageContent = `${message.speaker}: ${message.content}`;
+    }
     messages.push({
       role: message.role,
-      content: `${message.speaker + ': ' + message.content}`,
+      content: messageContent,
     });
   }
 
