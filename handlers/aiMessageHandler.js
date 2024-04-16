@@ -31,4 +31,4 @@ async function isNewMessageSafe(message) {
   return true;
 }
 
-module.exports = { generateAIResponse };
+module.exports = { generateAIResponse, isNewMessageSafe };
