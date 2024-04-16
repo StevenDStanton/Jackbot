@@ -8,7 +8,7 @@ const jackbotRegex = new RegExp(process.env.BOT_NAME, 'i');
 async function handleDiscordMessage(message) {
   if (
     message.author.globalName === process.env.OWNER_NAME &&
-    message.author.discriminator === proccess.env.DISCRIMINATOR &&
+    message.author.discriminator === process.env.DISCRIMINATOR &&
     message.content === 'dump logs'
   ) {
     const messageHistoryDump = dumpMessageHistory();
