@@ -8,7 +8,7 @@ const client = createClient({
 async function insertChatRow(role, speaker, message) {
   await client
     .execute({
-      sql: 'INSERT INTO users (Role, Speaker, Message) VALUES (?, ?, ?)',
+      sql: 'INSERT INTO chat (Role, Speaker, Message) VALUES (?, ?, ?)',
       args: [role, speaker, message],
     })
     .catch((error) => {
