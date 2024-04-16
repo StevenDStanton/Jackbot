@@ -1,3 +1,4 @@
+const { insertModViolation } = require('./db');
 const {
   generateAIResponse,
   isNewMessageModeratorFlagged,
@@ -23,6 +24,17 @@ async function handleDiscordMessage(message) {
 
   if (await isNewMessageModeratorFlagged(message.content)) {
     message.reply("Nope, Kitty can't process that type of content");
+    console.error(
+      'Moderator flagged message:',
+      message.author.username,
+      message.author.discriminator,
+      message.content,
+    );
+    insertModViolation(
+      message.author.username,
+      message.author.discriminator,
+      message.content,
+    );
     return;
   }
 

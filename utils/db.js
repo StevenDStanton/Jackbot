@@ -16,4 +16,15 @@ async function insertChatRow(role, speaker, message) {
     });
 }
 
-module.exports = { insertChatRow };
+async function insertModViolation(speaker, discriminator, message) {
+  await client
+    .execute({
+      sql: 'INSERT INTO violations (Speaker, Discriminator, Message) VALUES (?, ?, ?)',
+      args: [speaker, discriminator, message],
+    })
+    .catch((error) => {
+      console.error('Failed to insert mod flag:', error);
+    });
+}
+
+module.exports = { insertChatRow, insertModViolation };
