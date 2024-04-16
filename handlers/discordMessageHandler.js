@@ -1,4 +1,4 @@
-const { insertModViolation } = require('./db');
+const { insertModViolation } = require('../utils/db');
 const {
   generateAIResponse,
   isNewMessageModeratorFlagged,
