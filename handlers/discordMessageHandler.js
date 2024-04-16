@@ -1,4 +1,4 @@
-const { generateAIResponse } = require('./aiMessageHandler');
+const { generateAIResponse, isNewMessageSafe } = require('./aiMessageHandler');
 const {
   addMessageToHistory,
   dumpMessageHistory,
@@ -15,6 +15,12 @@ async function handleDiscordMessage(message) {
     message.reply(messageHistoryDump);
     return;
   }
+
+  if (!isNewMessageSafe(message.content)) {
+    message.reply("Nope, Kitty can't process that type of content");
+    return;
+  }
+
   if (message.author.bot || !jackbotRegex.test(message.content)) return;
 
   addMessageToHistory('user', message.author.username, message.content);

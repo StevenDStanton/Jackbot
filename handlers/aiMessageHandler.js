@@ -25,4 +25,10 @@ async function generateAIResponse() {
   }
 }
 
+async function isNewMessageSafe(message) {
+  const moderation = await OpenAIClient.moderation.create({ message });
+  console.log(moderation);
+  return true;
+}
+
 module.exports = { generateAIResponse };
