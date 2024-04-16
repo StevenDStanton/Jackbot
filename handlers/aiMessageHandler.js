@@ -26,7 +26,7 @@ async function generateAIResponse() {
 }
 
 async function isNewMessageSafe(message) {
-  const moderation = await OpenAIClient.moderation.create({ message });
+  const moderation = await OpenAIClient.moderations.create({ message });
   console.log(moderation);
   return true;
 }
