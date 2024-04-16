@@ -1,4 +1,7 @@
-const { generateAIResponse, isNewMessageSafe } = require('./aiMessageHandler');
+const {
+  generateAIResponse,
+  isNewMessageModeratorFlagged,
+} = require('./aiMessageHandler');
 const {
   addMessageToHistory,
   dumpMessageHistory,
