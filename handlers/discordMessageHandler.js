@@ -21,7 +21,7 @@ async function handleDiscordMessage(message) {
 
   if (message.author.bot || !jackbotRegex.test(message.content)) return;
 
-  if (isNewMessageModeratorFlagged(message.content)) {
+  if (await isNewMessageModeratorFlagged(message.content)) {
     message.reply("Nope, Kitty can't process that type of content");
     return;
   }

@@ -27,9 +27,6 @@ async function generateAIResponse() {
 
 async function isNewMessageModeratorFlagged(message) {
   const moderation = await OpenAIClient.moderations.create({ input: message });
-  // console.log(moderation.results[0]);
-  // console.log(moderation.results[0].categories);
-  //console.log(typeof moderation.results[0].flagged);
   console.log(moderation.results[0].flagged, message);
   return moderation.results[0].flagged;
 }
