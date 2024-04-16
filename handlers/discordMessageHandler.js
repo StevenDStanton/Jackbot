@@ -7,7 +7,7 @@ const {
   addMessageToHistory,
   dumpMessageHistory,
 } = require('../utils/historyManager');
-const jackbotRegex = new RegExp(process.env.BOT_NAME, 'i');
+const botRegex = new RegExp(process.env.BOT_NAME, 'i');
 
 async function handleDiscordMessage(message) {
   if (
@@ -20,7 +20,7 @@ async function handleDiscordMessage(message) {
     return;
   }
 
-  if (message.author.bot || !jackbotRegex.test(message.content)) return;
+  if (message.author.bot || !botRegex.test(message.content)) return;
 
   if (await isNewMessageModeratorFlagged(message.content)) {
     message.reply("Nope, Kitty can't process that type of content");

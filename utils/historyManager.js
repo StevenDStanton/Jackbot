@@ -1,9 +1,9 @@
-const { insertChatRow } = require('./db');
+// const { insertChatRow } = require('./db');
 const MAX_HISTORY = 25;
 const messageHistory = [];
 
 function addMessageToHistory(role, speaker, content) {
-  insertChatRow(role, speaker, content);
+  // insertChatRow(role, speaker, content);
   if (messageHistory.length > MAX_HISTORY) messageHistory.shift();
   messageHistory.push({ role, speaker, content });
 }
@@ -18,7 +18,7 @@ function prepareMessages() {
 
   for (let message of messageHistory) {
     let messageContent = '';
-    if (message.speaker.toLowerCase() === 'jackbot') {
+    if (message.author.bot) {
       messageContent = `${message.content}`;
     } else {
       messageContent = `${message.speaker}: ${message.content}`;
