@@ -40,6 +40,7 @@ async function handleDiscordMessage(message) {
 
   addMessageToHistory('user', message.author.username, message.content);
   const reply = await generateAIResponse();
+  console.log(reply);
   message.reply(reply);
 }
 
