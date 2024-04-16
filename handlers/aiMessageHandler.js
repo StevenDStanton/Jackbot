@@ -25,10 +25,11 @@ async function generateAIResponse() {
   }
 }
 
-async function isNewMessageSafe(message) {
+async function isNewMessageModeratorFlagged(message) {
   const moderation = await OpenAIClient.moderations.create({ input: message });
   console.log(moderation);
-  return true;
+  console.log(moderation.categories);
+  return moderation.flagged;
 }
 
-module.exports = { generateAIResponse, isNewMessageSafe };
+module.exports = { generateAIResponse, isNewMessageModeratorFlagged };
