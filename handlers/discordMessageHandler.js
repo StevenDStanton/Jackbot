@@ -1,11 +1,19 @@
 const { generateAIResponse } = require('./aiMessageHandler');
-const { addMessageToHistory } = require('../utils/historyManager');
+const {
+  addMessageToHistory,
+  dumpMessageHistory,
+} = require('../utils/historyManager');
 const jackbotRegex = new RegExp(process.env.BOT_NAME, 'i');
 
 async function handleDiscordMessage(message) {
-  console.log(message);
-  if (message.author.username === process.env.OWNER_NAME) {
-    //return;
+  if (
+    message.author.globalName === process.env.OWNER_NAME &&
+    message.author.discriminator === proccess.env.DISCRIMINATOR &&
+    message.content === 'dump logs'
+  ) {
+    const messageHistoryDump = dumpMessageHistory();
+    message.reply(messageHistoryDump);
+    return;
   }
   if (message.author.bot || !jackbotRegex.test(message.content)) return;
 
