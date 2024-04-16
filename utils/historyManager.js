@@ -30,4 +30,13 @@ function prepareMessages() {
   return messages;
 }
 
-module.exports = { addMessageToHistory, prepareMessages };
+function dumpMessageHistory() {
+  let messageHistoryLog = '';
+  for (let message of messageHistory) {
+    console.log(`${message.speaker}: ${message.content}`);
+    messageHistoryLog += `${message.speaker}: ${message.content}\n`;
+  }
+  return messageHistoryLog;
+}
+
+module.exports = { addMessageToHistory, prepareMessages, dumpMessageHistory };
