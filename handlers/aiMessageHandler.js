@@ -1,5 +1,8 @@
 const OpenAIAPI = require('openai');
-const { prepareMessages } = require('../utils/historyManager');
+const {
+  addMessageToHistory,
+  prepareMessages,
+} = require('../utils/historyManager');
 
 const OpenAIClient = new OpenAIAPI({ apiKey: process.env.OPENAI_TOKEN });
 
@@ -12,11 +15,13 @@ async function generateAIResponse() {
       messages: messages,
     });
     const responseMessage = completion.choices[0].message.content;
-
+    addMessageToHistory('assistant', process.env.BOT_NAME, responseMessage);
     return responseMessage;
   } catch (error) {
-    console.error('Error:', error);
-    return `Sorry, I'm having a pawsitively hard time understanding you right meow. Please try again later`;
+    console.error('Error:', error.message);
+    const errorText = `Sorry, I'm having a pawsitively hard time understanding you right meow. Please try again later`;
+    addMessageToHistory('assistant', process.env.BOT_NAME, errorText);
+    return errorText;
   }
 }
 
