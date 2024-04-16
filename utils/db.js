@@ -2,7 +2,7 @@ const { createClient } = require('@libsql/client');
 
 const client = createClient({
   url: process.env.TURSO_DATABASE_URL,
-  authToken: process.env.TURSO_AUTH_TOKEN,
+  authToken: process.env.TURSO_TOKEN,
 });
 
 async function insertChatRow(role, speaker, message) {
