@@ -1,4 +1,8 @@
 {
+  "name": "jack-bot",
+  "version": "1.0.0",
+  "description": "A Discord bot that uses OpenAI's GPT-4 to respond",
+  "main": "index.js",
   "dependencies": {
     "discord.js": "^14.14.1",
     "dotenv": "^16.4.5",
