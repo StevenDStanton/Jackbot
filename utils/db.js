@@ -6,10 +6,10 @@ const client = createClient({
 });
 
 async function insertChatRow(role, speaker, message) {
-  await client.query(
-    'INSERT INTO chat (Role, Speaker, Message) VALUES ($1, $2, $3)',
-    [role, speaker, message],
-  );
+  await client.execute({
+    sql: 'INSERT INTO users (Role, Speaker, Message) VALUES (?, ?, ?)',
+    args: [role, speaker, message],
+  });
 }
 
 module.exports = { insertChatRow };
