@@ -12,4 +12,4 @@ async function insertChatRow(role, speaker, message) {
   );
 }
 
-export { insertChatRow };
+module.exports = { insertChatRow };
