@@ -20,7 +20,11 @@ async function handleDiscordMessage(message) {
     return;
   }
 
-  if (message.author.bot || !botRegex.test(message.content)) return;
+  if (
+    message.author.bot ||
+    (!botRegex.test(message.content) && !message.guild == null)
+  )
+    return;
 
   if (await isNewMessageModeratorFlagged(message.content)) {
     message.reply("Nope, Kitty can't process that type of content");
