@@ -22,8 +22,7 @@ async function handleDiscordMessage(message) {
   console.log('Message guildID is:', message.guildId);
   if (
     message.author.bot ||
-    !botRegex.test(message.content) ||
-    message.guildId !== null
+    (!botRegex.test(message.content) && message.guildId !== null)
   )
     return;
 
