@@ -9,6 +9,7 @@ const client = new Client({
     GatewayIntentBits.DirectMessages,
     GatewayIntentBits.DirectMessageReactions,
   ],
+  partials: ['MESSAGE', 'CHANNEL', 'REACTION'],
 });
 client.once('ready', () => {
   console.log(`${process.env.BOT_NAME} is ready!`);
