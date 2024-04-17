@@ -23,7 +23,6 @@ function prepareMessages() {
     } else {
       messageContent = `${message.speaker}: ${message.content}`;
     }
-    console.log(message.role, message.speaker, messageContent);
     messages.push({
       role: message.role,
       content: messageContent,
