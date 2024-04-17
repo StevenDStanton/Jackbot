@@ -1,4 +1,4 @@
-const { Client, GatewayIntentBits } = require('discord.js');
+const { Client, GatewayIntentBits, Partials } = require('discord.js');
 const { handleDiscordMessage } = require('./handlers/discordMessageHandler');
 
 const client = new Client({
@@ -9,7 +9,7 @@ const client = new Client({
     GatewayIntentBits.DirectMessages,
     GatewayIntentBits.DirectMessageReactions,
   ],
-  partials: ['Message', 'Channel', 'Reaction', 'User'],
+  partials: [Partials.Message, Partials.Channel, Partials.Reaction],
 });
 client.once('ready', () => {
   console.log(`${process.env.BOT_NAME} is ready!`);
