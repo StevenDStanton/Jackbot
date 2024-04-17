@@ -18,7 +18,7 @@ function prepareMessages() {
 
   for (let message of messageHistory) {
     let messageContent = '';
-    if (message.role === 'assistant' {
+    if (message.role === 'assistant') {
       messageContent = `${message.content}`;
     } else {
       messageContent = `${message.speaker}: ${message.content}`;
