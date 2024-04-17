@@ -19,7 +19,6 @@ async function handleDiscordMessage(message) {
     message.reply(messageHistoryDump);
     return;
   }
-  console.log('Message guildID is:', message.guildId);
   if (
     message.author.bot ||
     (!botRegex.test(message.content) && message.guildId !== null)
@@ -27,7 +26,9 @@ async function handleDiscordMessage(message) {
     return;
 
   if (await isNewMessageModeratorFlagged(message.content)) {
-    message.reply("Nope, Kitty can't process that type of content");
+    message.reply(
+      `Nope, ${process.env.ANIMAL} can't process that type of content`,
+    );
     console.error(
       'Moderator flagged message:',
       message.author.username,
@@ -41,7 +42,6 @@ async function handleDiscordMessage(message) {
     );
     return;
   }
-  console.log('User:', message.author.username, message.content);
   addMessageToHistory('user', message.author.username, message.content);
   const reply = await generateAIResponse();
   console.log(reply);
