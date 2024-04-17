@@ -5,7 +5,8 @@ const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.MessageContent, // Ensure this intent is enabled in your bot's Discord Developer Portal as well
+    GatewayIntentBits.MessageContent,
+    GatewayIntentBits.DirectMessages,
   ],
 });
 client.once('ready', () => {
