@@ -10,6 +10,7 @@ const {
 const botRegex = new RegExp(process.env.BOT_NAME, 'i');
 
 async function handleDiscordMessage(message) {
+  console.log(messag);
   if (
     message.author.globalName === process.env.OWNER_NAME &&
     message.author.discriminator === process.env.DISCRIMINATOR &&
