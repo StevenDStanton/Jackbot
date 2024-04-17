@@ -10,7 +10,6 @@ const {
 const botRegex = new RegExp(process.env.BOT_NAME, 'i');
 
 async function handleDiscordMessage(message) {
-  console.log(message);
   if (
     message.author.globalName === process.env.OWNER_NAME &&
     message.author.discriminator === process.env.DISCRIMINATOR &&
@@ -20,8 +19,13 @@ async function handleDiscordMessage(message) {
     message.reply(messageHistoryDump);
     return;
   }
-
-  if (message.author.bot || !botRegex.test(message.content)) return;
+  console.log('Message guildID is:', message.guildId);
+  if (
+    message.author.bot ||
+    !botRegex.test(message.content) ||
+    message.guildId !== null
+  )
+    return;
 
   if (await isNewMessageModeratorFlagged(message.content)) {
     message.reply("Nope, Kitty can't process that type of content");
