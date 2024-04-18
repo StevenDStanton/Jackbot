@@ -13,11 +13,13 @@ DISCRIMINATOR=0
 TURSO_DATABASE_URL=
 TURSO_TOKEN=
 CHAT_TABLE=chat
+BOT_PROMPT=
+ANIMAL=
 ```
 
 ## To Do: 
 - [ ] Hook up Turso Database to track chats
-- [ ] Track Moderation Violations
 - [ ] Convert to Typescript
 - [ ] Look into voice chat
+- [ ] Add Games
 
