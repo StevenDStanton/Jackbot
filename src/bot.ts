@@ -1,5 +1,5 @@
-const { Client, GatewayIntentBits, Partials } = require('discord.js');
-const { handleDiscordMessage } = require('./handlers/discordMessageHandler');
+import { Client, GatewayIntentBits, Partials } from 'discord.js';
+import { handleDiscordMessage } from './handlers/discordMessageHandler';
 
 const client = new Client({
   intents: [
@@ -11,9 +11,11 @@ const client = new Client({
   ],
   partials: [Partials.Message, Partials.Channel, Partials.Reaction],
 });
+
 client.once('ready', () => {
   console.log(`${process.env.BOT_NAME} is ready!`);
 });
 
 client.on('messageCreate', handleDiscordMessage);
+
 client.login(process.env.DISCORD_TOKEN);
