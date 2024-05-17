@@ -1,5 +1,8 @@
 import OpenAIAPI from 'openai';
-import { addMessageToHistory, prepareMessages } from '../utils/historyManager';
+import {
+  addMessageToHistory,
+  prepareMessages,
+} from '../services/historyService';
 
 const OpenAIClient = new OpenAIAPI({
   apiKey: process.env.OPENAI_TOKEN || '',

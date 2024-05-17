@@ -1,5 +1,5 @@
 import { Message } from 'discord.js';
-import { insertModViolation } from '../utils/db';
+import { insertModViolation } from '../services/databaseService';
 import {
   generateAIResponse,
   isNewMessageModeratorFlagged,
@@ -7,7 +7,7 @@ import {
 import {
   addMessageToHistory,
   dumpMessageHistory,
-} from '../utils/historyManager';
+} from '../services/historyService';
 
 const botRegex = new RegExp(process.env.BOT_NAME || '', 'i');
 

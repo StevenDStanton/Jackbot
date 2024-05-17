@@ -1,2 +1,2 @@
 import 'dotenv/config';
-import './bot';
+import './client/botClient';

@@ -1,5 +1,5 @@
 import { Client, GatewayIntentBits, Partials } from 'discord.js';
-import { handleDiscordMessage } from './handlers/discordMessageHandler';
+import { handleDiscordMessage } from '../handlers/discordMessageHandler';
 
 const client = new Client({
   intents: [
