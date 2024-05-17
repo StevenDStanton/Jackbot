@@ -1,15 +1,17 @@
-const { insertModViolation } = require('../utils/db');
-const {
+import { Message } from 'discord.js';
+import { insertModViolation } from '../services/databaseService';
+import {
   generateAIResponse,
   isNewMessageModeratorFlagged,
-} = require('./aiMessageHandler');
-const {
+} from './aiMessageHandler';
+import {
   addMessageToHistory,
   dumpMessageHistory,
-} = require('../utils/historyManager');
-const botRegex = new RegExp(process.env.BOT_NAME, 'i');
+} from '../services/historyService';
 
-async function handleDiscordMessage(message) {
+const botRegex = new RegExp(process.env.BOT_NAME || '', 'i');
+
+async function handleDiscordMessage(message: Message): Promise<void> {
   if (
     message.author.globalName === process.env.OWNER_NAME &&
     message.author.discriminator === process.env.DISCRIMINATOR &&
@@ -19,11 +21,13 @@ async function handleDiscordMessage(message) {
     message.reply(messageHistoryDump);
     return;
   }
+
   if (
     message.author.bot ||
     (!botRegex.test(message.content) && message.guildId !== null)
-  )
+  ) {
     return;
+  }
 
   if (await isNewMessageModeratorFlagged(message.content)) {
     message.reply(
@@ -42,10 +46,11 @@ async function handleDiscordMessage(message) {
     );
     return;
   }
+
   addMessageToHistory('user', message.author.username, message.content);
   const reply = await generateAIResponse();
   console.log(reply);
   message.reply(reply);
 }
 
-module.exports = { handleDiscordMessage };
+export { handleDiscordMessage };
