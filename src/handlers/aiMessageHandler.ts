@@ -36,7 +36,7 @@ async function isNewMessageModeratorFlagged(message: string): Promise<boolean> {
     return moderation.results[0].flagged;
   } catch (error: any) {
     console.error('Moderation error:', error.message);
-    return false; // Assuming message is not flagged if there is an error
+    return false;
   }
 }
 

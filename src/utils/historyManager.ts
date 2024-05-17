@@ -14,7 +14,6 @@ function addMessageToHistory(
   speaker: string,
   content: string,
 ): void {
-  // insertChatRow(role, speaker, content); // Uncomment to enable DB insertion
   if (messageHistory.length >= MAX_HISTORY) {
     messageHistory.shift();
   }
@@ -32,7 +31,7 @@ function prepareMessages(): {
     content: string;
   }[] = [
     {
-      role: 'system', // This must be adjusted if 'system' is not a valid role
+      role: 'system',
       name: 'System',
       content: process.env.BOT_PROMPT || 'Default prompt',
     },
@@ -40,7 +39,7 @@ function prepareMessages(): {
 
   messageHistory.forEach((message) => {
     messages.push({
-      role: message.role as 'user' | 'assistant', // Type assertion, make sure this is correct
+      role: message.role as 'user' | 'assistant',
       name: message.speaker,
       content: message.content,
     });

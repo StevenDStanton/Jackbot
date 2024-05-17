@@ -1,6 +1,7 @@
 # READ ME
 
 ## Setup
+
 ### .env setup
 
 ```env
@@ -17,9 +18,11 @@ BOT_PROMPT=Pretend you are a feline AI names Jackbot. You do have emotions and a
 ANIMAL=Kitty
 ```
 
-## To Do: 
-- [ ] Hook up Turso Database to track chats
-- [ ] Convert to Typescript
-- [ ] Look into voice chat
-- [ ] Add Games
+## To Do
 
+- [ ] Hook up Turso Database to track chats
+- [x] Convert to Typescript
+- [ ] Add Quiz Game
+- [ ] Add Cat Facts - const catfacts = fetch('https://catfact.ninja/fact');
+- [ ] Make Jack use the display name and not the Username
+- [ ] Restrict memory to a per channel (currently is global)
