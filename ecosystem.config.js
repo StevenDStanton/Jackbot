@@ -2,7 +2,7 @@ module.exports = {
   apps: [
     {
       name: 'jack-bot',
-      script: 'index.js',
+      script: 'dist/index.js',
       instances: 1,
       autorestart: true,
       watch: true,
