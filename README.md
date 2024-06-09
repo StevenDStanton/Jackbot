@@ -21,8 +21,8 @@ ANIMAL=Kitty
 ## To Do
 
 - [ ] Hook up Turso Database to track chats
+- [ ] Hooke up Database to track violations
 - [x] Convert to Typescript
-- [ ] Add Quiz Game
 - [ ] Add Cat Facts - const catfacts = fetch('https://catfact.ninja/fact');
 - [ ] Make Jack use the display name and not the Username
 - [ ] Restrict memory to a per channel (currently is global)
