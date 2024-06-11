@@ -7,20 +7,25 @@ interface Message {
 }
 
 const MAX_HISTORY = 25;
-const messageHistory: Message[] = [];
+const messageHistory = new Map<string, Message[]>();
 
 function addMessageToHistory(
   role: string,
   speaker: string,
   content: string,
+  channelId: string,
 ): void {
-  if (messageHistory.length >= MAX_HISTORY) {
-    messageHistory.shift();
+  if (!messageHistory.has(channelId)) {
+    messageHistory.set(channelId, []);
   }
-  messageHistory.push({ role, speaker, content });
+
+  if (messageHistory.get(channelId).length >= MAX_HISTORY) {
+    messageHistory.get(channelId).shift();
+  }
+  messageHistory.get(channelId).push({ role, speaker, content });
 }
 
-function prepareMessages(): {
+function prepareMessages(channelId: string): {
   role: 'user' | 'assistant' | 'system';
   name: string;
   content: string;
@@ -37,7 +42,7 @@ function prepareMessages(): {
     },
   ];
 
-  messageHistory.forEach((message) => {
+  messageHistory.get(channelId).forEach((message) => {
     messages.push({
       role: message.role as 'user' | 'assistant',
       name: message.speaker,
@@ -48,13 +53,4 @@ function prepareMessages(): {
   return messages;
 }
 
-function dumpMessageHistory(): string {
-  let messageHistoryLog = '';
-  messageHistory.forEach((message) => {
-    console.log(`${message.speaker}: ${message.content}`);
-    messageHistoryLog += `${message.speaker}: ${message.content}\n\n`;
-  });
-  return messageHistoryLog;
-}
-
-export { addMessageToHistory, prepareMessages, dumpMessageHistory };
+export { addMessageToHistory, prepareMessages };
