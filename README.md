@@ -26,3 +26,4 @@ ANIMAL=Kitty
 - [ ] Add Cat Facts - const catfacts = fetch('https://catfact.ninja/fact');
 - [ ] Make Jack use the display name and not the Username
 - [x] Restrict memory to a per channel (currently is global)
+- [x] Set up Unit Tests
