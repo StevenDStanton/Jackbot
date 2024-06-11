@@ -46,7 +46,7 @@ async function handleDiscordMessage(message: Message): Promise<void> {
     );
     return;
   }
-
+  console.log('Channel ID: ' + message.channelId);
   addMessageToHistory('user', message.author.username, message.content);
   const reply = await generateAIResponse();
   console.log(reply);
