@@ -28,7 +28,7 @@ async function insertModViolation(
   message: string,
 ): Promise<void> {
   try {
-    const datetime = new Date().toISOString();
+    const datetime = getDateTime();
     await client.execute({
       sql: 'INSERT INTO violations (Speaker, Discriminator, Message, created_at) VALUES (?, ?, ?, ?)',
       args: [speaker, discriminator, message, datetime],
@@ -36,6 +36,13 @@ async function insertModViolation(
   } catch (error) {
     console.error('Failed to insert mod flag:', error);
   }
+}
+
+function getDateTime(): string {
+  const date = getDateTime();
+  const options = { timeZone: 'America/New_York', hour12: false };
+  const estTime = date.toLocaleString('en-US', options);
+  return estTime;
 }
 
 export { insertChatRow, insertModViolation };
