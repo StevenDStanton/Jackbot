@@ -1,5 +1,4 @@
 import { createClient } from '@libsql/client';
-import { format, toZonedTime } from 'date-fns-tz';
 
 const client = createClient({
   url: process.env.TURSO_DATABASE_URL || '',
@@ -29,7 +28,7 @@ async function insertModViolation(
   message: string,
 ): Promise<void> {
   try {
-    const datetime = getDateTime();
+    const datetime = new Date().toISOString();
     await client.execute({
       sql: 'INSERT INTO violations (Speaker, Discriminator, Message, created_at) VALUES (?, ?, ?, ?)',
       args: [speaker, discriminator, message, datetime],
@@ -37,19 +36,6 @@ async function insertModViolation(
   } catch (error) {
     console.error('Failed to insert mod flag:', error);
   }
-}
-
-function getDateTime(): string {
-  const date = new Date();
-  const timeZone = 'America/New_York';
-
-  const zonedDate = toZonedTime(date, timeZone);
-
-  const formattedDate = format(zonedDate, "yyyy-MM-dd'T'HH:mm:ssXXX", {
-    timeZone,
-  });
-
-  return formattedDate;
 }
 
 export { insertChatRow, insertModViolation };
