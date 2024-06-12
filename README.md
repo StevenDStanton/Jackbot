@@ -25,4 +25,5 @@ ANIMAL=Kitty
 - [x] Convert to Typescript
 - [ ] Add Cat Facts - const catfacts = fetch('https://catfact.ninja/fact');
 - [ ] Make Jack use the display name and not the Username
-- [ ] Restrict memory to a per channel (currently is global)
+- [x] Restrict memory to a per channel (currently is global)
+- [ ] Set up Unit Tests

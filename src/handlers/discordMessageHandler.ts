@@ -4,24 +4,11 @@ import {
   generateAIResponse,
   isNewMessageModeratorFlagged,
 } from './aiMessageHandler';
-import {
-  addMessageToHistory,
-  dumpMessageHistory,
-} from '../services/historyService';
+import { addMessageToHistory } from '../services/historyService';
 
 const botRegex = new RegExp(process.env.BOT_NAME || '', 'i');
 
 async function handleDiscordMessage(message: Message): Promise<void> {
-  if (
-    message.author.globalName === process.env.OWNER_NAME &&
-    message.author.discriminator === process.env.DISCRIMINATOR &&
-    message.content === 'dump logs'
-  ) {
-    const messageHistoryDump = dumpMessageHistory();
-    message.reply(messageHistoryDump);
-    return;
-  }
-
   if (
     message.author.bot ||
     (!botRegex.test(message.content) && message.guildId !== null)
@@ -46,9 +33,13 @@ async function handleDiscordMessage(message: Message): Promise<void> {
     );
     return;
   }
-
-  addMessageToHistory('user', message.author.username, message.content);
-  const reply = await generateAIResponse();
+  addMessageToHistory(
+    'user',
+    message.author.username,
+    message.content,
+    message.channelId,
+  );
+  const reply = await generateAIResponse(message.channelId);
   console.log(reply);
   message.reply(reply);
 }

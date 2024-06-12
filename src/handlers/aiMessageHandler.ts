@@ -8,8 +8,8 @@ const OpenAIClient = new OpenAIAPI({
   apiKey: process.env.OPENAI_TOKEN || '',
 });
 
-async function generateAIResponse(): Promise<string> {
-  const messages = prepareMessages();
+async function generateAIResponse(channelId: string): Promise<string> {
+  const messages = prepareMessages(channelId);
 
   try {
     const completion = await OpenAIClient.chat.completions.create({
@@ -21,12 +21,18 @@ async function generateAIResponse(): Promise<string> {
       'assistant',
       process.env.BOT_NAME || 'Bot',
       responseMessage,
+      channelId,
     );
     return responseMessage;
   } catch (error: any) {
     console.error('Error:', error.message);
     const errorText = `Sorry, I'm having a pawsitively hard time understanding you right meow. Please try again later.`;
-    addMessageToHistory('assistant', process.env.BOT_NAME || 'Bot', errorText);
+    addMessageToHistory(
+      'assistant',
+      process.env.BOT_NAME || 'Bot',
+      errorText,
+      channelId,
+    );
     return errorText;
   }
 }
