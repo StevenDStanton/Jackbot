@@ -54,8 +54,9 @@ pm2 start up
 
 ## To Do
 
-- [ ] Hook up Turso Database to track chats
-- [ ] Hook up Database to track violations
+- [x] Hook up Turso Database to track chats
+- [x] Hook up Turso Database to track violations
+- [x] Add DateTime to Databases
 - [x] Convert to Typescript
 - [ ] Add Cat Facts - const catfacts = fetch('https://catfact.ninja/fact');
 - [ ] Make Jack use the display name and not the Username
