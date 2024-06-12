@@ -18,6 +18,40 @@ BOT_PROMPT=Pretend you are a feline AI names Jackbot. You do have emotions and a
 ANIMAL=Kitty
 ```
 
+## PM2 Config
+
+### ecosystem.config.js
+
+```js
+module.exports = {
+  apps: [
+    {
+      name: 'jack-bot',
+      script: 'dist/index.js',
+      instances: 1,
+      autorestart: true,
+      watch: true,
+      max_memory_restart: '1G',
+      env: {
+        NODE_ENV: 'development',
+      },
+      env_production: {
+        NODE_ENV: 'production',
+      },
+    },
+  ],
+};
+```
+
+### to run
+
+```bash
+npm install -g pm2
+pm2 start ecosystem.config.js
+pm2 save
+pm2 start up
+```
+
 ## To Do
 
 - [ ] Hook up Turso Database to track chats
