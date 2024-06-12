@@ -1,4 +1,4 @@
-// import { insertChatRow } from './db';
+import { insertChatRow } from './databaseService';
 
 interface Message {
   role: string;
@@ -22,6 +22,7 @@ function addMessageToHistory(
   if (messageHistory.get(channelId).length >= MAX_HISTORY) {
     messageHistory.get(channelId).shift();
   }
+  insertChatRow(role, speaker, content, channelId);
   messageHistory.get(channelId).push({ role, speaker, content });
 }
 

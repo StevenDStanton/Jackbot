@@ -9,11 +9,13 @@ async function insertChatRow(
   role: string,
   speaker: string,
   message: string,
+  roomId: string,
 ): Promise<void> {
   try {
+    const datetime = formatLocalDateTime();
     await client.execute({
-      sql: 'INSERT INTO chat (Role, Speaker, Message) VALUES (?, ?, ?)',
-      args: [role, speaker, message],
+      sql: 'INSERT INTO chat (Role, Speaker, Message, room, created_at) VALUES (?, ?, ?, ?, ?)',
+      args: [role, speaker, message, roomId, datetime],
     });
   } catch (error) {
     console.error('Failed to insert chat row:', error);
@@ -26,13 +28,28 @@ async function insertModViolation(
   message: string,
 ): Promise<void> {
   try {
+    const datetime = formatLocalDateTime();
     await client.execute({
-      sql: 'INSERT INTO violations (Speaker, Discriminator, Message) VALUES (?, ?, ?)',
-      args: [speaker, discriminator, message],
+      sql: 'INSERT INTO violations (Speaker, Discriminator, Message, created_at) VALUES (?, ?, ?, ?)',
+      args: [speaker, discriminator, message, datetime],
     });
   } catch (error) {
     console.error('Failed to insert mod flag:', error);
   }
 }
+
+const formatLocalDateTime = (): string => {
+  const now = new Date();
+  return new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false,
+    timeZoneName: 'short',
+  }).format(now);
+};
 
 export { insertChatRow, insertModViolation };
