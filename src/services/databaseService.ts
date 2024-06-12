@@ -1,4 +1,5 @@
 import { createClient } from '@libsql/client';
+import { format, toZonedTime } from 'date-fns-tz';
 
 const client = createClient({
   url: process.env.TURSO_DATABASE_URL || '',
@@ -39,10 +40,16 @@ async function insertModViolation(
 }
 
 function getDateTime(): string {
-  const date = getDateTime();
-  const options = { timeZone: 'America/New_York', hour12: false };
-  const estTime = date.toLocaleString('en-US', options);
-  return estTime;
+  const date = new Date();
+  const timeZone = 'America/New_York';
+
+  const zonedDate = toZonedTime(date, timeZone);
+
+  const formattedDate = format(zonedDate, "yyyy-MM-dd'T'HH:mm:ssXXX", {
+    timeZone,
+  });
+
+  return formattedDate;
 }
 
 export { insertChatRow, insertModViolation };
