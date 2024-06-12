@@ -9,11 +9,13 @@ async function insertChatRow(
   role: string,
   speaker: string,
   message: string,
+  roomId: string,
 ): Promise<void> {
   try {
+    const datetime = new Date().toISOString();
     await client.execute({
-      sql: 'INSERT INTO chat (Role, Speaker, Message) VALUES (?, ?, ?)',
-      args: [role, speaker, message],
+      sql: 'INSERT INTO chat (Role, Speaker, Message, room, created_at) VALUES (?, ?, ?, ?, ?)',
+      args: [role, speaker, message, roomId, datetime],
     });
   } catch (error) {
     console.error('Failed to insert chat row:', error);
@@ -26,9 +28,10 @@ async function insertModViolation(
   message: string,
 ): Promise<void> {
   try {
+    const datetime = new Date().toISOString();
     await client.execute({
-      sql: 'INSERT INTO violations (Speaker, Discriminator, Message) VALUES (?, ?, ?)',
-      args: [speaker, discriminator, message],
+      sql: 'INSERT INTO violations (Speaker, Discriminator, Message, created_at) VALUES (?, ?, ?, ?)',
+      args: [speaker, discriminator, message, datetime],
     });
   } catch (error) {
     console.error('Failed to insert mod flag:', error);
