@@ -15,7 +15,7 @@ async function handleDiscordMessage(message: Message): Promise<void> {
   ) {
     return;
   }
-
+  console.log(message.author);
   if (await isNewMessageModeratorFlagged(message.content)) {
     message.reply(
       `Nope, ${process.env.ANIMAL} can't process that type of content`,
