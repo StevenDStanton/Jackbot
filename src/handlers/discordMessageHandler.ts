@@ -15,19 +15,19 @@ async function handleDiscordMessage(message: Message): Promise<void> {
   ) {
     return;
   }
-  console.log(message.author);
+
   if (await isNewMessageModeratorFlagged(message.content)) {
     message.reply(
       `Nope, ${process.env.ANIMAL} can't process that type of content`,
     );
     console.error(
       'Moderator flagged message:',
-      message.author.username,
+      message.author.globalName,
       message.author.discriminator,
       message.content,
     );
     insertModViolation(
-      message.author.username,
+      message.author.globalName,
       message.author.discriminator,
       message.content,
     );
@@ -35,7 +35,7 @@ async function handleDiscordMessage(message: Message): Promise<void> {
   }
   addMessageToHistory(
     'user',
-    message.author.username,
+    message.author.globalName,
     message.content,
     message.channelId,
   );

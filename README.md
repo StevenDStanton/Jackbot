@@ -58,7 +58,8 @@ pm2 start up
 - [x] Hook up Turso Database to track violations
 - [x] Add DateTime to Databases
 - [x] Convert to Typescript
-- [ ] Add Cat Facts - const catfacts = fetch('https://catfact.ninja/fact');
-- [ ] Make Jack use the display name and not the Username
+- [x] Make Jack use the display name and not the Username
 - [x] Restrict memory to a per channel (currently is global)
+- [ ] Add Cat Facts - const cat facts = fetch('https://catfact.ninja/fact');
 - [ ] Set up Unit Tests
+- [ ] Consider recording users unique ID in the future
