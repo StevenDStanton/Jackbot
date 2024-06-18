@@ -52,7 +52,7 @@ pm2 save
 pm2 start up
 ```
 
-## To Do
+## To Do - Complete
 
 - [x] Hook up Turso Database to track chats
 - [x] Hook up Turso Database to track violations
@@ -60,6 +60,9 @@ pm2 start up
 - [x] Convert to Typescript
 - [x] Make Jack use the display name and not the Username
 - [x] Restrict memory to a per channel (currently is global)
+- [x] Set up Unit Tests
+
+## Possible future plans
+
 - [ ] Add Cat Facts - const cat facts = fetch('https://catfact.ninja/fact');
-- [ ] Set up Unit Tests
 - [ ] Consider recording users unique ID in the future
