@@ -54,9 +54,7 @@ function prepareMessages(channelId: string): {
   const channelMessages = messageHistory.get(channelId);
 
   if (!channelMessages) {
-    throw new Error(
-      "Adding this because Typscript isn't smart enough to realize I already checked if this exists above. If this ever happens let me know",
-    );
+    throw new Error("The message doesn't exist we can't do much");
   }
 
   channelMessages.forEach((message) => {
