@@ -17,6 +17,9 @@ async function generateAIResponse(channelId: string): Promise<string> {
       messages: messages,
     });
     const responseMessage = completion.choices[0].message.content;
+    if (!responseMessage) {
+      throw new Error('No response message');
+    }
     addMessageToHistory(
       'assistant',
       process.env.BOT_NAME || 'Bot',

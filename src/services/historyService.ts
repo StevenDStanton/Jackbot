@@ -19,11 +19,19 @@ function addMessageToHistory(
     messageHistory.set(channelId, []);
   }
 
-  if (messageHistory.get(channelId).length >= MAX_HISTORY) {
-    messageHistory.get(channelId).shift();
+  const channelMessages = messageHistory.get(channelId);
+
+  if (!channelMessages) {
+    throw new Error(
+      "Adding this because Typscript isn't smart enough to realize I already checked if this exists above. If this ever happens let me know",
+    );
+  }
+
+  if (channelMessages.length >= MAX_HISTORY) {
+    channelMessages.shift();
   }
   insertChatRow(role, speaker, content, channelId);
-  messageHistory.get(channelId).push({ role, speaker, content });
+  channelMessages.push({ role, speaker, content });
 }
 
 function prepareMessages(channelId: string): {
@@ -43,7 +51,15 @@ function prepareMessages(channelId: string): {
     },
   ];
 
-  messageHistory.get(channelId).forEach((message) => {
+  const channelMessages = messageHistory.get(channelId);
+
+  if (!channelMessages) {
+    throw new Error(
+      "Adding this because Typscript isn't smart enough to realize I already checked if this exists above. If this ever happens let me know",
+    );
+  }
+
+  channelMessages.forEach((message) => {
     messages.push({
       role: message.role as 'user' | 'assistant',
       name: message.speaker,

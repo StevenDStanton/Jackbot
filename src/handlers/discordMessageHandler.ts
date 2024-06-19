@@ -15,7 +15,14 @@ async function handleDiscordMessage(message: Message): Promise<void> {
   ) {
     return;
   }
-
+  if (
+    !message.content ||
+    !message.channelId ||
+    !message.author.globalName ||
+    !message.author.discriminator
+  ) {
+    throw new Error('Malformed message object');
+  }
   if (await isNewMessageModeratorFlagged(message.content)) {
     message.reply(
       `Nope, ${process.env.ANIMAL} can't process that type of content`,
